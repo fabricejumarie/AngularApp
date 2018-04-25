@@ -11,6 +11,8 @@ import { CoreModule } from "./appModules/core/core.module";
 import { UserComponent } from './user/user.component';
 import { UserServiceConfig } from "./appModules/core/user-service-config";
 
+import {DxDataGridModule, DxDropDownBoxModule} from "devextreme-angular";
+
 
 const appRoutes: Routes = [
   { path: 'product', component: ProductComponent },
@@ -31,6 +33,8 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
+    DxDataGridModule,
+    DxDropDownBoxModule,
      CoreModule.forRoot(new UserServiceConfig()),
      RouterModule.forRoot(
       appRoutes

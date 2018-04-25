@@ -1,6 +1,82 @@
+<div>
 <p>
   customer works!
 </p>
 <p>
   The user is {{userName}} and he is {{isLoggedIn ? "" : "not"}} logged in
 </p>
+</div>
+
+<div>
+<dx-data-grid
+    #gridCustomer
+    id="gridCustomer"
+    [dataSource]="customers"
+    keyExpr="customerId"
+    [hoverStateEnabled]="true"
+    [selectedRowKeys]="[]">
+    <dxo-editing
+            mode="popup"
+            [allowUpdating]="true">
+            <dxo-form
+             [colCount]="2">
+                 <dxi-item itemType="group" caption="Person Information">
+                     <dxi-item dataField="customerId"></dxi-item>
+                     <dxi-item dataField="firstName"></dxi-item>
+                     <dxi-item dataField="lastName"></dxi-item>                     
+                </dxi-item>
+                <dxi-item itemType="group" caption="Goods">
+                     <dxi-item dataField="productIds" [colSpan]="2"></dxi-item>                     
+                </dxi-item> 
+            </dxo-form>
+        </dxo-editing>
+    <dxo-selection mode="single"></dxo-selection>
+    <dxi-column dataField="customerId" caption="ID" [width]="70"></dxi-column>
+    <dxi-column dataField="firstName"></dxi-column>
+    <dxi-column dataField="lastName"></dxi-column>
+    <dxi-column dataField="email" [width]="180"></dxi-column>
+    <dxi-column
+        dataField="productIds"
+        editCellTemplate="ddBoxTemplate"
+        caption="Prd Ids">         
+        <dxo-lookup
+            [dataSource]="products"
+            displayExpr="productName"
+            valueExpr="productId">
+        </dxo-lookup>
+    </dxi-column>
+    <div *dxTemplate="let cellData of 'ddBoxTemplate'">
+      <dx-drop-down-box
+        #ddBox (onValueChanged)="onValueChanged($event, cellData.setValue)"
+        [(value)]="cellData.value"
+        [dataSource]="products"
+        displayExpr="productName"
+        valueExpr="productId">
+        <div *dxTemplate="let data of 'content'">
+          <dx-data-grid
+          keyExpr="productId"
+          [(selectedRowKeys)]="cellData.value"
+          [selection]="{ mode: 'multiple' }"
+          width="100%" (onSelectionChanged)="onSelectionChanged($event, ddBox.instance)"
+          [dataSource]="products">
+              <dxi-column dataField="productId"></dxi-column>
+              <dxi-column dataField="productName"></dxi-column>
+              <dxo-scrolling mode="infinite"></dxo-scrolling>
+          </dx-data-grid>
+        </div>
+      </dx-drop-down-box>
+    </div>
+</dx-data-grid>
+<div id="orderInfo" *ngIf="gridCustomer.selectedRowKeys.length && gridCustomer.instance.getSelectedRowsData()[0].orders.length">
+  <dx-data-grid
+    #gridCustomerDetails
+    id="gridCustomerDetails"
+    [dataSource]="gridCustomer.instance.getSelectedRowsData()[0].orders"
+    keyExpr="customerId"
+    [hoverStateEnabled]="true">
+    <dxi-column dataField="product.productId" [width]="70"></dxi-column>
+    <dxi-column dataField="product.productName"></dxi-column>
+</dx-data-grid>
+</div>
+
+</div>
