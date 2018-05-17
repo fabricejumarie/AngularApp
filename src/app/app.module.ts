@@ -12,6 +12,7 @@ import { UserComponent } from './user/user.component';
 import { UserServiceConfig } from "./appModules/core/user-service-config";
 
 import {DxDataGridModule, DxDropDownBoxModule} from "devextreme-angular";
+import { HighlightKeyWordPipe } from './pipe/highlight-key-word.pipe';
 
 
 const appRoutes: Routes = [
@@ -28,7 +29,8 @@ const appRoutes: Routes = [
     AppComponent,
     ProductComponent,
     CustomerComponent,
-    UserComponent
+    UserComponent,
+    HighlightKeyWordPipe
   ],
   imports: [
     BrowserModule,

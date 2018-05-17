@@ -15,6 +15,7 @@ export class CustomerComponent implements OnInit {
 
   customers: Customer[];
   products: Product[];
+  private _keyWord: string;
   
   constructor(private _userServiceConfig: UserServiceConfig,
   private _repositoryService: RepositoryService) {
@@ -41,6 +42,14 @@ export class CustomerComponent implements OnInit {
 
   onValueChanged(args, setValueMethod) {
     setValueMethod(args.value);
+  }
+
+  get keyWord(): string {
+    return this._keyWord;
+  }
+
+  set keyWord(value: string) {
+    this._keyWord = value;
   }
 
 }

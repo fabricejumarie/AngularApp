@@ -1,10 +1,10 @@
 <div>
-<p>
-  customer works!
-</p>
-<p>
-  The user is {{userName}} and he is {{isLoggedIn ? "" : "not"}} logged in
-</p>
+    <p>
+    The user is {{userName}} and he is {{isLoggedIn ? "" : "not"}} logged in
+    </p>
+    <div>
+        <input placeholder="Search product..." [(ngModel)]="keyWord" >
+    </div>
 </div>
 
 <div>
@@ -75,7 +75,11 @@
     keyExpr="customerId"
     [hoverStateEnabled]="true">
     <dxi-column dataField="product.productId" [width]="70"></dxi-column>
-    <dxi-column dataField="product.productName"></dxi-column>
+    <dxi-column dataField="product.productName" cellTemplate="productNameTemplate"></dxi-column>
+
+    <div *dxTemplate="let currentProduct of 'productNameTemplate'"
+        [innerHtml]="currentProduct.data.product.productName | highlightKeyWord : keyWord">
+    </div>
 </dx-data-grid>
 </div>
 
