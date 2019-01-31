@@ -1,6 +1,6 @@
 export interface Product {
-    productId: string;
-    productName: string;
-    referencePrice: number;
-    referencePriceCurrency: string;
+    id: string;
+    name: string;
+    description: number;
+    recommandedPrice: string;
 }

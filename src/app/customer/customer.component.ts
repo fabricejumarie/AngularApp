@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from "../appModules/core/user.service";
-import { UserServiceConfig } from "../appModules/core/user-service-config";
-import { Customer } from "../BusinessModel/customer";
-import { RepositoryService } from "../Services/repository.service";
-import { Product } from "../BusinessModel/product";
+import { UserService } from '../appModules/core/user.service';
+import { UserServiceConfig } from '../appModules/core/user-service-config';
+import { Customer } from '../BusinessModel/customer';
+import { RepositoryService } from '../Services/repository.service';
+import { Product } from '../BusinessModel/product';
 
 @Component({
   selector: 'app-customer',
@@ -16,7 +16,7 @@ export class CustomerComponent implements OnInit {
   customers: Customer[];
   products: Product[];
   private _keyWord: string;
-  
+
   constructor(private _userServiceConfig: UserServiceConfig,
   private _repositoryService: RepositoryService) {
   }
@@ -35,9 +35,9 @@ export class CustomerComponent implements OnInit {
   }
 
   onSelectionChanged(e, dropDownBoxInstance) {
-       var keys = e.selectedRowKeys;
-     
-       dropDownBoxInstance.option("value", keys.length> 0 ? keys : null);
+       const keys = e.selectedRowKeys;
+
+       dropDownBoxInstance.option('value', keys.length > 0 ? keys : null);
       }
 
   onValueChanged(args, setValueMethod) {

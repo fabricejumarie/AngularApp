@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
@@ -7,18 +8,21 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ProductComponent } from './product/product.component';
 import { CustomerComponent } from './customer/customer.component';
-import { CoreModule } from "./appModules/core/core.module";
+import { CoreModule } from './appModules/core/core.module';
 import { UserComponent } from './user/user.component';
-import { UserServiceConfig } from "./appModules/core/user-service-config";
+import { UserServiceConfig } from './appModules/core/user-service-config';
 
-import {DxDataGridModule, DxDropDownBoxModule} from "devextreme-angular";
+import {DxDataGridModule, DxDropDownBoxModule, DxTextAreaModule, DxFileUploaderModule, DxButtonModule, DxSelectBoxModule,
+  DxTemplateModule, DxFormModule} from 'devextreme-angular';
 import { HighlightKeyWordPipe } from './pipe/highlight-key-word.pipe';
+import { GridWithComplexeDataTypeComponent } from './grid-with-complexe-data-type/grid-with-complexe-data-type.component';
 
 
 const appRoutes: Routes = [
   { path: 'product', component: ProductComponent },
   { path: 'customer', component: CustomerComponent },
   { path: 'user', component: UserComponent },
+  { path: 'superGrid', component: GridWithComplexeDataTypeComponent },
   { path: '', redirectTo: '/product',  pathMatch: 'full'  },
   { path: '**', component: ProductComponent }
 ];
@@ -30,13 +34,21 @@ const appRoutes: Routes = [
     ProductComponent,
     CustomerComponent,
     UserComponent,
-    HighlightKeyWordPipe
+    HighlightKeyWordPipe,
+    GridWithComplexeDataTypeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     DxDataGridModule,
     DxDropDownBoxModule,
+    DxTextAreaModule,
+    DxFileUploaderModule,
+    DxButtonModule,
+    DxSelectBoxModule,
+    DxTemplateModule,
+    DxFormModule,
+    HttpClientModule,
      CoreModule.forRoot(new UserServiceConfig()),
      RouterModule.forRoot(
       appRoutes

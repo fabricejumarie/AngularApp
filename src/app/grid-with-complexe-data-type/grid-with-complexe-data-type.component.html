@@ -1,0 +1,63 @@
+<div id="data-grid-demo">
+  <dx-data-grid 
+      id="gridContainer"
+      [dataSource]="dataSource"
+      keyExpr="ID"
+      [showBorders]="true"
+      (onEditorPreparing)="onEditorPreparing($event)">
+      
+      <dxo-paging [enabled]="false"></dxo-paging>
+      <dxo-editing 
+          mode="popup"
+          [allowUpdating]="true">
+      </dxo-editing>
+      <dxo-filter-row 
+        [visible]="true" 
+        [applyFilter]="auto"></dxo-filter-row>
+      <dxo-header-filter [visible]="true"></dxo-header-filter>
+      
+      <dxi-column dataField="Prefix" caption="Title" [width]="70"></dxi-column>
+      <dxi-column dataField="FirstName" [width]="170"></dxi-column>
+      <dxi-column dataField="LastName" [width]="170"></dxi-column>
+      <dxi-column dataField="Position" [width]="170"></dxi-column>
+      <dxi-column
+          dataField="StateID"
+          caption="State"
+          [width]="125">         
+          <dxo-lookup
+              [dataSource]="states"
+              displayExpr="Name"
+              valueExpr="ID">
+          </dxo-lookup>
+      </dxi-column>
+      <dxi-column dataField="FilterPosition.value" caption="Filter pos" [width]="150" cellTemplate="filterPositionTemplate"
+                editCellTemplate="filterPositionEditTemplate"
+                  [setCellValue]="setCellValue"></dxi-column>
+    <dxi-column dataField="FilterPosition.additionalValue" 
+    caption="Filter pos add val" [width]="150" cellTemplate="filterPositionTemplate"
+    editCellTemplate="filterPositionEditTemplateForAdditionalData">
+    </dxi-column>
+      <dxi-column
+          dataField="BirthDate"
+          dataType="date"
+          [visible]="false">
+      </dxi-column>
+        <div *dxTemplate="let fp of 'filterPositionTemplate'">
+            <b>{{fp.value}}</b>
+        </div>
+        <div *dxTemplate="let fp of 'filterPositionEditTemplate'">
+            <dx-text-area [height]="50"
+            [(value)]="fp.value" (onValueChanged)="onFilterPositionChanged($event, fp.setValue)"></dx-text-area>
+        </div>
+
+        <div *dxTemplate="let fp of 'filterPositionEditTemplateForAdditionalData'">
+                <dx-text-area [height]="50"
+                [(value)]="fp.value"></dx-text-area>
+            </div>
+  </dx-data-grid>
+  <div>
+      <div *ngFor="let item of tab">
+          {{item}}
+      </div>
+  </div>
+</div>

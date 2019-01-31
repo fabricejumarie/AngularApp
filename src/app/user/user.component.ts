@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from "../appModules/core/user.service";
-import { UserServiceConfig } from "../appModules/core/user-service-config";
+import { UserService } from '../appModules/core/user.service';
+import { UserServiceConfig } from '../appModules/core/user-service-config';
 
 @Component({
   selector: 'app-user',
@@ -10,6 +10,7 @@ import { UserServiceConfig } from "../appModules/core/user-service-config";
 export class UserComponent implements OnInit {
 
 _userName: string;
+fileValue: any[] = [];
   constructor(private _userServiceConfig: UserServiceConfig) {
 
   }
@@ -23,6 +24,10 @@ _userName: string;
 
   set userName(value: string) {
     this._userServiceConfig.userName = value;
+  }
+
+  updateClick() {
+    console.log(this.fileValue);
   }
 
 }
