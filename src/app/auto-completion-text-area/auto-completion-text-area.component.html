@@ -1,0 +1,8 @@
+<div>
+  auto-completion-text-area works!
+  <div>
+    <textarea #txtArea 
+    (keydown)="onKeyDown($event, txtArea)"
+    [(ngModel)]="txtValue"></textarea>
+  </div>
+</div>

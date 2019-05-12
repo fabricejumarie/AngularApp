@@ -16,6 +16,7 @@ import {DxDataGridModule, DxDropDownBoxModule, DxTextAreaModule, DxFileUploaderM
   DxTemplateModule, DxFormModule} from 'devextreme-angular';
 import { HighlightKeyWordPipe } from './pipe/highlight-key-word.pipe';
 import { GridWithComplexeDataTypeComponent } from './grid-with-complexe-data-type/grid-with-complexe-data-type.component';
+import { AutoCompletionTextAreaComponent } from './auto-completion-text-area/auto-completion-text-area.component';
 
 
 const appRoutes: Routes = [
@@ -23,8 +24,9 @@ const appRoutes: Routes = [
   { path: 'customer', component: CustomerComponent },
   { path: 'user', component: UserComponent },
   { path: 'superGrid', component: GridWithComplexeDataTypeComponent },
+  { path: 'autoCompletionTextBox', component: AutoCompletionTextAreaComponent},
   { path: '', redirectTo: '/product',  pathMatch: 'full'  },
-  { path: '**', component: ProductComponent }
+  { path: '**', component: ProductComponent },
 ];
 
 
@@ -35,7 +37,8 @@ const appRoutes: Routes = [
     CustomerComponent,
     UserComponent,
     HighlightKeyWordPipe,
-    GridWithComplexeDataTypeComponent
+    GridWithComplexeDataTypeComponent,
+    AutoCompletionTextAreaComponent
   ],
   imports: [
     BrowserModule,
